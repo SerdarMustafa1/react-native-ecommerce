@@ -78,14 +78,15 @@ const styles = StyleSheet.create({
     height: "15%",
     padding: 10,
   },
-  title: { fontSize: 18, marginVertical: 4 },
+  title: { fontSize: 18, fontFamily: "open-sans-bold" },
   price: {
+    fontFamily: "open-sans",
     fontSize: 14,
     color: "#888",
   },
   actions: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     height: "25%",
     paddingHorizontal: 10,
