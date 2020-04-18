@@ -31,7 +31,6 @@ export default (state = initialState, action) => {
       } else {
         const updatedOrNewCartItem = new CartItem(
           1,
-          price,
           prodPrice,
           productTitle,
           prodPrice
