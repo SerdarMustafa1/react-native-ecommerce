@@ -10,6 +10,7 @@ import * as cartActions from "store/actions/cart";
 const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
   const dispatch = useDispatch();
+
   return (
     <FlatList
       data={products}
@@ -25,7 +26,9 @@ const ProductsOverviewScreen = (props) => {
               productTitle: itemData.item.title,
             });
           }}
-          onAddToCart={() => dispatch(cartActions.addToCart(itemData.item))}
+          onAddToCart={() => {
+            dispatch(cartActions.addToCart(itemData.item));
+          }}
         />
       )}
     />
@@ -40,7 +43,9 @@ ProductsOverviewScreen.navigationOptions = (navData) => {
         <Item
           title="Cart"
           iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
-          onPress={() => navData.navigation.navigate("Cart")}
+          onPress={() => {
+            navData.navigation.navigate("Cart");
+          }}
         />
       </HeaderButtons>
     ),
