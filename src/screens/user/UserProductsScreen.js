@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Platform, Button } from "react-native";
+import { FlatList, Platform, Button, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "components/UI/CustomHeaderButton";
@@ -15,6 +15,26 @@ const UserProductsScreen = (props) => {
     props.navigation.navigate("EditProduct", { productId: id });
   };
 
+  const deleteHandler = (id) => {
+    Alert.alert(
+      "Delete?",
+      "Are you sure you want to delete?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "default",
+        },
+        {
+          text: "OK",
+          style: "destructive",
+          onPress: () => dispatch(productActions.deleteProduct(id)),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <FlatList
       data={userProducts}
@@ -24,19 +44,21 @@ const UserProductsScreen = (props) => {
           image={itemData.item.imageUrl}
           title={itemData.item.title}
           price={itemData.item.price}
-          onSelect={() => editProductHandler(itemData.item.id)}
+          onSelect={() => {
+            editProductHandler(itemData.item.id);
+          }}
         >
           <Button
             color={Colors.primary}
             title="Edit"
-            onPress={() => editProductHandler(itemData.item.id)}
+            onPress={() => {
+              editProductHandler(itemData.item.id);
+            }}
           />
           <Button
             color={Colors.primary}
             title="Delete"
-            onPress={() => {
-              dispatch(productActions.deleteProduct(itemData.item.id));
-            }}
+            onPress={deleteHandler.bind(this, itemData.item.id)}
           />
         </ProductItem>
       )}
